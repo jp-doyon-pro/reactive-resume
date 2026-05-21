@@ -78,10 +78,11 @@ services:
         condition: service_healthy
 
   reactive_resume:
-    image: ghcr.io/amruthpillai/reactive-resume:latest
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+#    image: ghcr.io/amruthpillai/reactive-resume:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: reactive-resume-local
     networks:
       - data_network
       - storage_network
@@ -107,6 +108,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   postgres_data:

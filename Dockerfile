@@ -6,6 +6,7 @@ FROM node:${NODE_VERSION}-slim AS base
 
 WORKDIR /app
 
+
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
     PNPM_HOME="/pnpm" \
     PATH="/pnpm:$PATH" \
@@ -65,6 +66,11 @@ COPY --from=builder --chown=node:node /app/apps/web/dist ./apps/web/dist
 COPY --from=builder --chown=node:node /app/apps/server/dist ./apps/server/dist
 COPY --from=pruner --chown=node:node /app/migrations ./migrations
 
+# Install curl HERE (as root)
+RUN apt-get update && apt-get install -y curl \
+    && rm -rf /var/lib/apt/lists/*
+
+
 WORKDIR /app
 
 USER node
@@ -74,3 +80,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD ["node", "-e", "fetch(`http://127.0.0.1:${process.env.PORT ?? 3000}/api/health`).then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));"]
 
 CMD ["node", "apps/server/dist/index.mjs"]
+
