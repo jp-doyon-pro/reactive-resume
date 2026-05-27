@@ -116,4 +116,11 @@ export const templates = {
 		tags: ["Single-column", "ATS friendly", "Uppercase headings", "Executive", "Consulting", "Startup"],
 		sidebarPosition: "none",
 	},
+	rosko: {
+		name: "Rosko",
+		description: msg`Single-column with uppercase section headings and a primary-color top rule on every page; polished for executive, consulting, or startup resumes.`,
+		imageUrl: "/templates/jpg/rosko.jpg",
+		tags: ["Single-column", "ATS friendly", "Uppercase headings", "Executive", "Consulting", "Startup"],
+		sidebarPosition: "none",
+	},
 } as const satisfies Record<Template, TemplateMetadata>;
