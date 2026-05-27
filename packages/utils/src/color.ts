@@ -1,9 +1,10 @@
 import type { ColorResult } from "@uiw/color-convert";
-import { hsvaToHex, rgbaStringToHsva } from "@uiw/color-convert";
+//import { hsvaToHex, rgbaStringToHsva } from "@uiw/color-convert";
+import * as colorConvert from "@uiw/color-convert";
 
 export function rgbaStringToHex(rgba: string): string {
-	const hsva = rgbaStringToHsva(rgba);
-	return hsvaToHex(hsva);
+	const hsva = colorConvert.rgbaStringToHsva(rgba);
+	return colorConvert.hsvaToHex(hsva);
 }
 
 export function parseColorString(value: string): ColorResult["rgba"] | null {
