@@ -16,13 +16,24 @@ export function ExportSectionBuilder() {
 	const [isPrinting, setIsPrinting] = useState(false);
 	const resume = resumeData;
 
-	const onDownloadJSON = useCallback(() => {
+	const onDownloadJSON = useCallback(async () => {
 		if (!resume) return;
-		const filename = generateFilename(resume.name, "json");
+
+		const handle = await window.showSaveFilePicker({
+			types: [
+				{
+					description: "JSON Files",
+					accept: {
+						"application/json": [".json"],
+					},
+				},
+			],
+		});
 		const jsonString = JSON.stringify(resume.data, null, 2);
 		const blob = new Blob([jsonString], { type: "application/json" });
-
-		downloadWithAnchor(blob, filename);
+		const writable = await handle.createWritable();
+		await writable.write(blob);
+		await writable.close();
 	}, [resume]);
 
 	const onDownloadDOCX = useCallback(async () => {
