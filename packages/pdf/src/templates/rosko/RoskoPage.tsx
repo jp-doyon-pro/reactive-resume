@@ -113,11 +113,18 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 						/>
 					)}
 
-					{/* {featuredSummarySection && (
+					{_randstad_logo && showHeader && (
+						<Text style={{ fontSize: 12, textAlign: "center" }}>
+							{"DOSSIER DE COMPETENCES\n"}
+							{data.basics.headline && `${data.basics.headline}`}
+						</Text>
+					)}
+
+					{featuredSummarySection && (
 						<View style={styles.specialContainer}>
 							<Section section={featuredSummarySection} placement="main" showHeading={false} />
 						</View>
-					)} */}
+					)}
 
 					<View style={composeStyles(styles.mainContent, { rowGap: metrics.sectionGap })}>
 						{regularMainSections.map((section, index) => (
