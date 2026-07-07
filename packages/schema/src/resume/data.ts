@@ -629,6 +629,12 @@ export const metadataSchema = z.object({
 		.describe(
 			"Personal notes for the resume. Can be used to add any additional information or instructions for the resume. These notes are not displayed on the resume, they are only visible to the author of the resume when editing the resume. This should be a HTML-formatted string.",
 		),
+	footnote: z
+		.string()
+		.optional()
+		.describe(
+			"Personal notes for the resume. Can be used to add any additional information or instructions for the resume. These notes are not displayed on the resume, they are only visible to the author of the resume when editing the resume. This should be a HTML-formatted string.",
+		),
 	styleRules: styleRulesSchema.describe(
 		"Structured style rules that target semantic resume sections and slots for React PDF rendering.",
 	),

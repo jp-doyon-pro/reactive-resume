@@ -64,6 +64,7 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 
 	const _sidebarImage = metadata.layout.sidebarImage ? metadata.layout.sidebarImage : null;
 	const _randstad_logo = metadata.layout.mainImage ? metadata.layout.mainImage : null;
+	const _footnote = metadata.footnote ? metadata.footnote : null;
 
 	return (
 		<Page size={pageSize} style={composeStyles(styles.page, pageMinHeightStyle)}>
@@ -124,19 +125,18 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 						))}
 					</View>
 
-					<View
-						style={{
-							position: "absolute",
-							bottom: 10,
-							left: 0,
-							right: 0,
-						}}
-					>
-						<Text style={{ fontSize: 8, textAlign: "left" }}>
-							Ce document est la propriété de la Société Randstad Digital – Diffusion Contrôlée - Reproduction Interdite
-							– V2.0 www.randstaddigital.fr
-						</Text>
-					</View>
+					{_footnote && (
+						<View
+							style={{
+								position: "absolute",
+								bottom: 10,
+								left: 0,
+								right: 0,
+							}}
+						>
+							<Text style={{ fontSize: 8, textAlign: "left" }}>{_footnote}</Text>
+						</View>
+					)}
 				</View>
 			</TemplateProvider>
 		</Page>
