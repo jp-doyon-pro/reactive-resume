@@ -62,6 +62,9 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 		? sidebarSections.filter((section) => section !== "summary")
 		: sidebarSections;
 
+	const _sidebarImage = "http://localhost:3000/templates/rosko/randstad_banner.png";
+	const _randstad_logo = "http://localhost:3000/templates/rosko/randstad_logo.png";
+
 	return (
 		<Page size={pageSize} style={composeStyles(styles.page, pageMinHeightStyle)}>
 			<TemplateProvider styles={styles} colors={colors} features={roskoFeatures}>
@@ -71,10 +74,24 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 							width: `${metadata.layout.sidebarWidth}%`,
 						})}
 					>
-						{showHeader && <Header styles={styles} colors={colors} />}
+						{_sidebarImage && (
+							<Image
+								src={_sidebarImage}
+								style={{
+									width: "100%",
+									// marginBottom: metrics.sectionGap,
+								}}
+							/>
+						)}
+
+						{/* {showHeader && <Header styles={styles} colors={colors} />} */}
 
 						{!page.fullWidth && (
-							<View style={composeStyles(styles.sidebarContent, { rowGap: metrics.sectionGap })}>
+							<View
+								style={composeStyles(styles.sidebarContent, {
+									rowGap: metrics.sectionGap,
+								})}
+							>
 								{regularSidebarSections.map((section, index) => (
 									<Section key={index} section={section} placement="sidebar" />
 								))}
@@ -84,16 +101,39 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 				)}
 
 				<View style={styles.mainColumn}>
-					{featuredSummarySection && (
+					<Image
+						src={_randstad_logo}
+						style={{
+							width: "30%",
+							alignSelf: "flex-end",
+							// marginBottom: metrics.sectionGap,
+						}}
+					/>
+
+					{/* {featuredSummarySection && (
 						<View style={styles.specialContainer}>
 							<Section section={featuredSummarySection} placement="main" showHeading={false} />
 						</View>
-					)}
+					)} */}
 
 					<View style={composeStyles(styles.mainContent, { rowGap: metrics.sectionGap })}>
 						{regularMainSections.map((section, index) => (
 							<Section key={index} section={section} placement="main" />
 						))}
+					</View>
+
+					<View
+						style={{
+							position: "absolute",
+							bottom: 10,
+							left: 0,
+							right: 0,
+						}}
+					>
+						<Text style={{ fontSize: 8, textAlign: "left" }}>
+							Ce document est la propriété de la Société Randstad Digital – Diffusion Contrôlée - Reproduction Interdite
+							– V2.0 www.randstaddigital.fr
+						</Text>
 					</View>
 				</View>
 			</TemplateProvider>
@@ -101,7 +141,7 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 	);
 };
 
-const Header = ({ styles, colors }: { styles: RoskoStyles; colors: TemplateColorRoles }) => {
+const _Header = ({ styles, colors }: { styles: RoskoStyles; colors: TemplateColorRoles }) => {
 	const { basics, picture } = useRender();
 	const hasPicture = hasTemplatePicture(picture);
 
@@ -238,7 +278,7 @@ const useRoskoTemplate = (): RoskoTemplate => {
 			levelItemActive: { backgroundColor: primary },
 			sidebarColumn: {
 				flexShrink: 0,
-				backgroundColor: primaryTint,
+				backgroundColor: rgbaStringToHex("rgb(201, 203, 221)"),
 			},
 			sidebarContent: {
 				paddingHorizontal: metrics.page.paddingHorizontal,
