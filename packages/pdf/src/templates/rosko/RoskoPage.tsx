@@ -85,7 +85,7 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 							/>
 						)}
 
-						{/* {showHeader && <Header styles={styles} colors={colors} />} */}
+						{!_sidebarImage && showHeader && <Header styles={styles} colors={colors} />}
 
 						{!page.fullWidth && (
 							<View
@@ -143,7 +143,7 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 	);
 };
 
-const _Header = ({ styles, colors }: { styles: RoskoStyles; colors: TemplateColorRoles }) => {
+const Header = ({ styles, colors }: { styles: RoskoStyles; colors: TemplateColorRoles }) => {
 	const { basics, picture } = useRender();
 	const hasPicture = hasTemplatePicture(picture);
 
