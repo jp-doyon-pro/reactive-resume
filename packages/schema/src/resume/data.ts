@@ -454,6 +454,10 @@ export const layoutSchema = z.object({
 		.catch(35)
 		.describe("The width of the sidebar column, defined as a percentage of the page width."),
 	pages: z.array(pageLayoutSchema).describe("The pages to display in the layout."),
+
+	sidebarImage: z.string().url().optional().describe("URL of the image displayed at the top of the sidebar."),
+
+	mainImage: z.string().url().optional().describe("URL of the image displayed at the top of the main column."),
 });
 
 export const pageSchema = z.object({

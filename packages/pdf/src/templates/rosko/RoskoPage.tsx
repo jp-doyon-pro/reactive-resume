@@ -62,8 +62,8 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 		? sidebarSections.filter((section) => section !== "summary")
 		: sidebarSections;
 
-	const _sidebarImage = "http://localhost:3000/templates/rosko/randstad_banner.png";
-	const _randstad_logo = "http://localhost:3000/templates/rosko/randstad_logo.png";
+	const _sidebarImage = metadata.layout.sidebarImage ? metadata.layout.sidebarImage : null;
+	const _randstad_logo = metadata.layout.mainImage ? metadata.layout.mainImage : null;
 
 	return (
 		<Page size={pageSize} style={composeStyles(styles.page, pageMinHeightStyle)}>
@@ -101,14 +101,16 @@ export const RoskoPage = ({ page, pageIndex }: TemplatePageProps) => {
 				)}
 
 				<View style={styles.mainColumn}>
-					<Image
-						src={_randstad_logo}
-						style={{
-							width: "30%",
-							alignSelf: "flex-end",
-							// marginBottom: metrics.sectionGap,
-						}}
-					/>
+					{_randstad_logo && (
+						<Image
+							src={_randstad_logo}
+							style={{
+								width: "30%",
+								alignSelf: "flex-end",
+								// marginBottom: metrics.sectionGap,
+							}}
+						/>
+					)}
 
 					{/* {featuredSummarySection && (
 						<View style={styles.specialContainer}>
